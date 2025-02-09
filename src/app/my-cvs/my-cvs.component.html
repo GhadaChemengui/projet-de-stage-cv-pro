@@ -1,0 +1,30 @@
+<!-- my-cvs.component.html -->
+<div class="cv-list">
+  <h2>Mes CV</h2>
+  
+  <div *ngFor="let cv of cvList" class="cv-card">
+    <div class="cv-image">
+      <!-- Cliquer sur l'image pour l'afficher en grand -->
+      <img [src]="cv.imageUrl" alt="{{ cv.title }}" class="cv-thumbnail" (click)="viewImage(cv.imageUrl)">
+    </div>
+    <div class="cv-details">
+      <h3>{{ cv.title }}</h3>
+      <p>Dernière modification : {{ cv.lastModified | date: 'dd/MM/yyyy' }}</p>
+    </div>
+
+    <div class="cv-actions">
+      <button (click)="editCV(cv)" class="btn btn-outline">Modifier</button>
+      <button (click)="downloadPDF(cv)" class="btn btn-outline">Télécharger PDF</button>
+      <button (click)="shareCV(cv)" class="btn btn-outline">Partager</button>
+      <button (click)="deleteCV(cv.id)" class="btn btn-danger">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pour afficher l'image en grand -->
+<div *ngIf="selectedImageUrl" class="image-modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeImage()">&times;</span>
+    <img [src]="selectedImageUrl" alt="Image agrandie" class="enlarged-image">
+  </div>
+</div>

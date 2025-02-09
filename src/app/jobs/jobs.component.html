@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="job-board">
+    <!-- Filtres -->
+    <div class="filters">
+      <select class="filter-select" [(ngModel)]="selectedJob">
+        <option value="">Métier</option>
+        <option value="dev">Développement</option>
+        <option value="design">Design</option>
+        <option value="marketing">Marketing</option>
+      </select>
+
+      <select class="filter-select" [(ngModel)]="selectedLocation">
+        <option value="">Localisation</option>
+        <option value="paris">Paris</option>
+        <option value="lyon">Lyon</option>
+        <option value="marseille">Marseille</option>
+      </select>
+
+      <select class="filter-select" [(ngModel)]="selectedType">
+        <option value="">Type de contrat</option>
+        <option value="cdi">CDI</option>
+        <option value="cdd">CDD</option>
+        <option value="stage">Stage</option>
+        <option value="freelance">Freelance</option>
+      </select>
+
+      <input type="text" placeholder="🔍 Rechercher..." class="search-input" [(ngModel)]="searchText"/>
+    </div>
+
+    <!-- Liste des offres -->
+    <div class="job-list">
+      @for (job of jobs(); track job.id) {
+        <div class="job-card" (click)="setSelectedJob(job)">
+          <div class="job-header">
+            <div>
+              <h3 class="job-title">{{ job.title }}</h3>
+              <p class="job-company">{{ job.company }}</p>
+            </div>
+            <span class="job-type">{{ job.type }}</span>
+          </div>
+          <div class="job-details">
+            <span>📍 {{ job.location }}</span>
+            <span>📅 {{ job.publishedAt | date }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Détails de l'offre -->
+    @if (selectedJobDetail()) {
+      <div class="job-detail">
+        <h2>{{ selectedJobDetail()?.title }}</h2>
+        <p class="job-company">{{ selectedJobDetail()?.company }}</p>
+
+        <div class="job-section">
+          <h3>Description</h3>
+          <p>{{ selectedJobDetail()?.description }}</p>
+        </div>
+
+        <div class="job-section">
+          <h3>Profil recherché</h3>
+          <p>{{ selectedJobDetail()?.requirements }}</p>
+        </div>
+
+        <div class="job-section">
+          <h3>Comment postuler</h3>
+          <p>{{ selectedJobDetail()?.applyInfo }}</p>
+        </div>
+
+        <button class="apply-btn" (click)="applyToJob()">Postuler</button>
+      </div>
+    }
+  </div>
+</div>

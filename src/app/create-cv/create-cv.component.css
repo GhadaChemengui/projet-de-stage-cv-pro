@@ -1,0 +1,191 @@
+:root {
+    --primary-color: #6a11cb; /* Violet vif */
+    --secondary-color: #2575fc; /* Bleu électrique */
+    --accent-color: #ff6f61; /* Corail */
+    --text-color: #2c3e50;
+    --background-color: #f0f4f8; /* Fond clair et doux */
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.8); /* Arrière-plan en verre */
+    --border-radius: 20px; /* Coins très arrondis */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    --transition-speed: 0.4s;
+    --font-family: 'Poppins', sans-serif; /* Police moderne et géométrique */
+  }
+  
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    backdrop-filter: blur(10px); /* Effet de flou pour le fond */
+  }
+  
+  .cv-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    background: var(--glass-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px); /* Effet de verre */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure subtile */
+    transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed);
+  }
+  
+  .cv-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cv-form-container, .cv-preview-container {
+    background: var(--glass-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-speed) ease-in-out;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
+  
+  .form-section {
+    margin-bottom: 40px;
+  }
+  
+  .form-section h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+  
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.9);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border: 1px solid var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 15px rgba(100, 97, 103, 0.3);
+  }
+  
+  .add-button, .submit-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border: none;
+    padding: 14px 30px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 18px;
+    font-weight: bold;
+  }
+  
+  .add-button:hover, .submit-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(106, 17, 203, 0.3);
+  }
+  
+  .remove-button {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(62, 49, 65, 0.1);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+  }
+  
+  .remove-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
+  
+  .cv-preview-container {
+    overflow-y: auto;
+  }
+  
+  .preview-content {
+    color: var(--text-color);
+  }
+  
+  .preview-content h2, .preview-content h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .preview-content p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .cv-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    .form-group input, .form-group textarea, .form-group select {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .submit-button {
+      font-size: 1rem;
+      padding: 15px;
+    }
+  }

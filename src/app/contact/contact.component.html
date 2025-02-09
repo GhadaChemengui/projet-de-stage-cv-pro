@@ -1,0 +1,73 @@
+<div class="contact-container">
+    <div style="text-align: center;">
+      <h3><strong>Contactez-nous</strong></h3>
+  </div>
+      <!-- Formulaire de contact -->
+      <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+        <div class="form-group">
+          
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="contactFormData.name"
+            required
+            #name="ngModel"
+            class="form-control"
+            placeholder="Votre nom"
+          />
+          <div *ngIf="name.invalid && name.touched" class="error">Le nom est requis.</div>
+        </div>
+    
+        <div class="form-group">
+          
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="contactFormData.email"
+            required
+            #email="ngModel"
+            class="form-control"
+            placeholder="Votre email"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error">Veuillez entrer un email valide.</div>
+        </div>
+    
+        <div class="form-group">
+          
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            [(ngModel)]="contactFormData.subject"
+            required
+            class="form-control"
+            placeholder="Le sujet de votre message"
+          />
+        </div>
+    
+        <div class="form-group">
+          
+          <textarea
+            id="message"
+            name="message"
+            [(ngModel)]="contactFormData.message"
+            required
+            class="form-control"
+            placeholder="Votre message"
+          ></textarea>
+        </div>
+    
+        <button type="submit" [disabled]="contactForm.invalid" class="btn-submit">Envoyer</button>
+      </form>
+    
+      <!-- Message de confirmation -->
+      <div *ngIf="isSubmitted" class="confirmation-message">
+        <p>Votre demande a été envoyée avec succès. Nous vous répondrons dans les plus brefs délais.</p>
+      </div>
+    
+    
+    </div>
+    
+

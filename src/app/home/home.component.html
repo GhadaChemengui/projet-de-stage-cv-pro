@@ -1,0 +1,71 @@
+<!-- Bannière principale -->
+<section class="banner">
+    <div class="banner-content">
+      <h1>Créez votre CV professionnel en quelques clics !</h1>
+      <a class="cta-button" [routerLink]="['/create-cv']">Commencez maintenant</a>
+    </div>
+  </section>
+  
+  <!-- Présentation des avantages -->
+  <section class="advantages">
+    <div class="advantage">
+      <i class="fas fa-check-circle"></i>
+      <h2>Facilité d'utilisation</h2>
+      <p>Créez votre CV en quelques étapes simples et intuitives.</p>
+    </div>
+    <div class="advantage">
+      <i class="fas fa-palette"></i>
+      <h2>Modèles personnalisables</h2>
+      <p>Choisissez parmi une variété de modèles modernes et professionnels.</p>
+    </div>
+    <div class="advantage">
+      <i class="fas fa-share-alt"></i>
+      <h2>Partage rapide et efficace</h2>
+      <p>Téléchargez et partagez votre CV en un seul clic.</p>
+    </div>
+  </section>
+  
+  <section class="model-preview">
+    <h2>Découvrez nos modèles de CV</h2>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-slide" *ngFor="let model of duplicatedModels">
+          <!-- Cliquer sur l'image pour l'afficher en grand -->
+          <img [src]="model.image" [alt]="model.title" class="cv-thumbnail" (click)="viewImage(model.image)">
+          <h3>{{ model.title }}</h3>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Fenêtre d'affichage en grand (lightbox) -->
+    <div *ngIf="selectedImage" class="lightbox" (click)="closeImage()">
+      <img [src]="selectedImage" alt="Image agrandie">
+    </div>
+  </section>
+  
+ 
+  
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Foire aux questions</h2>
+    <div class="faq-item" *ngFor="let faq of faqs; let i = index" (click)="toggleFAQ(i)">
+      <div class="faq-question">
+        {{ faq.question }}
+        <i class="fas" [ngClass]="{'fa-chevron-down': !faq.open, 'fa-chevron-up': faq.open}"></i>
+      </div>
+      <div class="faq-answer" *ngIf="faq.open">
+        {{ faq.answer }}
+      </div>
+    </div>
+  </section>
+   <!-- Appel à l'action -->
+  
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" *ngIf="isLightboxOpen" (click)="closeLightbox()">
+    <div class="lightbox-content">
+      <img [src]="lightboxImage" alt="Lightbox Image">
+    </div>
+  </div>
+  <section class="cta">
+    <a class="cta-button" [routerLink]="['/create-cv']">Créer mon CV</a>
+  </section>

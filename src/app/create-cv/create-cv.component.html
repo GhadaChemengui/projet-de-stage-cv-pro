@@ -1,0 +1,151 @@
+<div class="cv-container">
+    <!-- Formulaire -->
+    <div class="cv-form-container">
+      <h1>{{ title }}</h1>
+      
+      <form (ngSubmit)="generateCV()">
+        <!-- Informations Personnelles -->
+        <div class="form-section">
+          <h2>Informations Personnelles</h2>
+          <div class="form-group">
+            <label for="full-name">Nom complet</label>
+            <input type="text" [(ngModel)]="personalInfo.fullName" name="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" [(ngModel)]="personalInfo.email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="tel" [(ngModel)]="personalInfo.phone" name="phone">
+          </div>
+          <div class="form-group">
+            <label for="address">Adresse</label>
+            <input type="text" [(ngModel)]="personalInfo.address" name="address">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn</label>
+            <input type="url" [(ngModel)]="personalInfo.linkedin" name="linkedin">
+          </div>
+        </div>
+  
+        <!-- Expériences Professionnelles -->
+        <div class="form-section">
+          <h2>Expériences Professionnelles</h2>
+          <div *ngFor="let experience of experiences; let i = index" class="experience">
+            <div class="form-group">
+              <label for="job-title">Poste</label>
+              <input type="text" [(ngModel)]="experience.jobTitle" name="job-title{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="company">Entreprise</label>
+              <input type="text" [(ngModel)]="experience.company" name="company{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="start-date">Date de début</label>
+              <input type="date" [(ngModel)]="experience.startDate" name="start-date{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="end-date">Date de fin</label>
+              <input type="date" [(ngModel)]="experience.endDate" name="end-date{{i}}">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea [(ngModel)]="experience.description" name="description{{i}}" rows="4"></textarea>
+            </div>
+            <button type="button" class="remove-button" (click)="removeExperience(i)">
+              Supprimer
+            </button>
+          </div>
+          <button type="button" class="add-button" (click)="addExperience()">Ajouter une expérience</button>
+        </div>
+  
+        <!-- Formations -->
+        <div class="form-section">
+          <h2>Formations</h2>
+          <div *ngFor="let education of educations; let i = index" class="education">
+            <div class="form-group">
+              <label for="degree">Diplôme</label>
+              <input type="text" [(ngModel)]="education.degree" name="degree{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="school">Établissement</label>
+              <input type="text" [(ngModel)]="education.school" name="school{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="education-start-date">Date de début</label>
+              <input type="date" [(ngModel)]="education.startDate" name="education-start-date{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="education-end-date">Date de fin</label>
+              <input type="date" [(ngModel)]="education.endDate" name="education-end-date{{i}}">
+            </div>
+            <button type="button" class="remove-button" (click)="removeEducation(i)">
+              Supprimer
+            </button>
+          </div>
+          <button type="button" class="add-button" (click)="addEducation()">Ajouter une formation</button>
+        </div>
+  
+        <!-- Compétences -->
+        <div class="form-section">
+          <h2>Compétences</h2>
+          <div *ngFor="let skill of skills; let i = index" class="skill">
+            <div class="form-group">
+              <label for="skill-name">Compétence</label>
+              <input type="text" [(ngModel)]="skill.skillName" name="skill-name{{i}}" required>
+            </div>
+            <div class="form-group">
+              <label for="skill-level">Niveau</label>
+              <select [(ngModel)]="skill.skillLevel" name="skill-level{{i}}">
+                <option value="Débutant">Débutant</option>
+                <option value="Intermédiaire">Intermédiaire</option>
+                <option value="Avancé">Avancé</option>
+                <option value="Expert">Expert</option>
+              </select>
+            </div>
+            <button type="button" class="remove-button" (click)="removeSkill(i)">
+              Supprimer
+            </button>
+          </div>
+          <button type="button" class="add-button" (click)="addSkill()">Ajouter une compétence</button>
+        </div>
+  
+        <!-- Soumettre le formulaire -->
+        <div class="form-section">
+          <button type="submit" class="submit-button">Générer mon CV</button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Aperçu en temps réel -->
+    <div class="cv-preview-container">
+      <h2>Aperçu du CV</h2>
+      <div class="preview-content">
+        <p><strong>Nom complet:</strong> {{ personalInfo.fullName }}</p>
+        <p><strong>Email:</strong> {{ personalInfo.email }}</p>
+        <p><strong>Téléphone:</strong> {{ personalInfo.phone }}</p>
+        <p><strong>Adresse:</strong> {{ personalInfo.address }}</p>
+        <p><strong>LinkedIn:</strong> <a [href]="personalInfo.linkedin" target="_blank">{{ personalInfo.linkedin }}</a></p>
+  
+        <h3>Expériences Professionnelles</h3>
+        <div *ngFor="let experience of experiences">
+          <p><strong>{{ experience.jobTitle }} at {{ experience.company }}</strong></p>
+          <p><strong>De:</strong> {{ experience.startDate | date }} <strong>à:</strong> {{ experience.endDate | date }}</p>
+          <p><strong>Description:</strong> {{ experience.description }}</p>
+        </div>
+  
+        <h3>Formations</h3>
+        <div *ngFor="let education of educations">
+          <p><strong>{{ education.degree }} - {{ education.school }}</strong></p>
+          <p><strong>De:</strong> {{ education.startDate | date }} <strong>à:</strong> {{ education.endDate | date }}</p>
+        </div>
+  
+        <h3>Compétences</h3>
+        <div *ngFor="let skill of skills">
+          <p><strong>{{ skill.skillName }} - Niveau:</strong> {{ skill.skillLevel }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
